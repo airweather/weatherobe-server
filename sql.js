@@ -60,9 +60,6 @@ module.exports = {
   search: {
     query:`SELECT * FROM look WHERE date LIKE ? OR weather LIKE ? OR top LIKE ? OR bottom  LIKE ? OR shoes LIKE ? OR acc LIKE ? OR memo LIKE ?;`
   },
-  // search: {
-  //   query:`SELECT * FROM look WHERE date LIKE ? OR weather LIKE ? OR top LIKE ? OR bottom  LIKE ? OR shoes LIKE ? OR acc LIKE ? OR memo LIKE ?;`
-  // },
   searchResult: {
     query:`SELECT look.id, look.image, user.name FROM look, user WHERE id IN (?) AND user.email = look.user;`
   },

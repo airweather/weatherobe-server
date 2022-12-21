@@ -3,6 +3,8 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 const fs = require('fs');
+const dotenv = require('dotenv');
+dotenv.config();
 
 app.use(session({
   secret: 'secret code',
@@ -31,17 +33,18 @@ fs.watchFile(__dirname + '/sql.js', (curr, prev) => {
 });
 
 const db = {
-  database: "weatherobe",
+  database: process.env.DATABASE,
   connectionLimit: 10,
-  host: "127.0.0.1",
-  user: "root",
-  password: "1234"
-};
+  host: process.env.HOST,
+  user: process.env.USER,
+  password: process.env.PASSWORD
+}
+
+console.log(process.env.DATABASE);
 
 const dbPool = require('mysql').createPool(db);
 
 app.post('/upload/:name/:fileName', async (request, res) => {
-  console.log('post');
   let {
     name,
     fileName
@@ -69,7 +72,6 @@ app.post('/upload/:name/:fileName', async (request, res) => {
 });
 
 app.get('/download/:name/:fileName', (request, res) => {
-  console.log('image load');
   const {
     name,
     fileName
@@ -102,7 +104,6 @@ app.post('/api/getLogin', async (request, res) => {
   try{
     let loginInfo = await req.db('getLogin', request.body.param);
     if(loginInfo) {
-      console.log(loginInfo[0].email);
       request.session['email'] = loginInfo[0].email;
       res.send(loginInfo[0]);
     }else {
@@ -116,7 +117,6 @@ app.post('/api/getLogin', async (request, res) => {
 });
 
 app.post('/api/kakaoLogin', async (request, res) => {
-  console.log(request.body.param);
   try{
     await req.db('userInsert', request.body.param);
     if(request.body.param.length > 0) {
@@ -135,12 +135,6 @@ app.post('/api/kakaoLogin', async (request, res) => {
   }
 });
 
-// app.post('/api/logout', async (request, res) => {
-//   request.session.destroy();
-//   res.send('Logout Ok')
-//   console.log('logout')
-// });
-
 app.post('/api/emailCheck', async (request, res) => {
   try{
     const emailCheck = await req.db('emailCheck', request.body.param);
@@ -157,7 +151,6 @@ app.post('/api/nameCheck', async (request, res) => {
   try{
     const nameCheck = await req.db('nameCheck', request.body.param);
     if(nameCheck) {
-      console.log(nameCheck[0].name);
       res.send(nameCheck[0].name);
     }
   } catch(err) {
@@ -169,7 +162,6 @@ app.post('/api/signup', async (request, res) => {
   try{
     const signup = await req.db('signup', request.body.param);
     if(signup) {
-      console.log(true);
       res.send(signup);
     }
   } catch(err) {
@@ -179,13 +171,9 @@ app.post('/api/signup', async (request, res) => {
 
 app.post('/api/signout', async (request, res) => {
   try{
-    console.log(request.body.param);
     const signout = await req.db('withdrawal', request.body.param[0]);
     const dir = `${__dirname}/uploads/${request.body.param[1]}`;
-    console.log(dir);
     if(signout) {
-      console.log('회원 db삭제');
-      console.log(dir);
       fs.rmdir(dir, { recursive: true }, (err) => err ?  
       console.log(err) : console.log(`${dir} 를 정상적으로 삭제했습니다`));
       res.send(signout);
