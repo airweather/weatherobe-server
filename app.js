@@ -3,9 +3,13 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 const fs = require('fs');
+const path = require('path');
+
 
 const morgan = require('morgan');
-app.use(morgan('combined'));
+app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"'));
+
+
 
 const dotenv = require('dotenv');
 dotenv.config();
