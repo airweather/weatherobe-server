@@ -5,11 +5,9 @@ const session = require('express-session');
 const fs = require('fs');
 const path = require('path');
 
-
 const morgan = require('morgan');
-app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"'));
-
-
+const logStream = fs.createWriteStream((`./access.log`), {flags: 'a'});
+app.use(morgan(('combined'), {stream: logStream}));
 
 const dotenv = require('dotenv');
 dotenv.config();
