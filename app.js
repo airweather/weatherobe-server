@@ -3,6 +3,10 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 const fs = require('fs');
+
+const morgan = require('morgan');
+app.use(morgan('combined'));
+
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -39,8 +43,6 @@ const db = {
   user: process.env.USER,
   password: process.env.PASSWORD
 }
-
-console.log(process.env.DATABASE);
 
 const dbPool = require('mysql').createPool(db);
 
