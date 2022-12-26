@@ -18,7 +18,7 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     secure: false,
-    maxAge: 1000 * 60 * 60 //쿠키 유효 시간
+    maxAge: 60 * 60 * 2//쿠키 유효 시간 - 2시간
   }
 }));
 
