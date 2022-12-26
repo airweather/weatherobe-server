@@ -1,4 +1,0 @@
-::ffff:127.0.0.1 - - [25/Dec/2022:15:27:47 +0000] "POST /api/getMain HTTP/1.1" 200 157 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
-::ffff:127.0.0.1 - - [25/Dec/2022:15:27:47 +0000] "GET /download/lily/16703496546792.jpg HTTP/1.1" 200 - "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
-::ffff:127.0.0.1 - - [25/Dec/2022:15:27:47 +0000] "GET /download/kate/16703494937744.jpg HTTP/1.1" 200 - "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
-::ffff:127.0.0.1 - - [25/Dec/2022:15:27:47 +0000] "GET /download/jack/16703495635466.jpg HTTP/1.1" 200 - "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
