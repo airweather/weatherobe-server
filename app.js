@@ -4,10 +4,13 @@ const app = express();
 const session = require('express-session');
 const fs = require('fs');
 const path = require('path');
+const logger = require('./logger');
 
-const morgan = require('morgan');
-const logStream = fs.createWriteStream((`./access.log`), {flags: 'a'});
-app.use(morgan(('combined'), {stream: logStream}));
+//로그
+// const morgan = require('morgan');
+// const logStream = fs.createWriteStream((`./access.log`), {flags: 'a'});
+// app.use(morgan(('combined'), {stream: logStream}));
+
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -27,7 +30,7 @@ app.use(express.json({
 }));
 
 const server = app.listen(3000, ()=> {
-  console.log('Server started. port 3000.');
+  logger.info('Server started. port 3000.');
 });
 
 let sql = require('./sql.js');
