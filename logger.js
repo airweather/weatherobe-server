@@ -1,4 +1,4 @@
-const {createLogger, transports, format} = require("winston");
+const {createLogger, transports, format, Logger} = require("winston");
 const {combine, colorize, timestamp, label, simple, printf} = format;
 const dotenv = require('dotenv');
 dotenv.config();
@@ -44,4 +44,7 @@ if (process.env.NODE_ENV !== "production") {
   logger.add(opts.console);
 }
 
+logger.stream = {
+  write: (message) => logger.info(message),
+}
 module.exports = logger;

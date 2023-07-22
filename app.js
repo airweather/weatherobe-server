@@ -4,10 +4,12 @@ const app = express();
 const session = require('express-session');
 const fs = require('fs');
 const path = require('path');
-const logger = require('./logger');
 
 //로그
-// const morgan = require('morgan');
+const logger = require('./logger');
+const morgan = require('morgan');
+app.use(morgan("tiny", { stream: logger.stream }));
+console.log(logger.stream);
 // const logStream = fs.createWriteStream((`./access.log`), {flags: 'a'});
 // app.use(morgan(('combined'), {stream: logStream}));
 
